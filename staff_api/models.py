@@ -1,40 +1,39 @@
-from turtle import mode
+from email.policy import default
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
-import uuid
+from django.contrib.auth.models import BaseUserManager
+from django.conf import settings
+import random
 
 
-class UserProfileManager():
+class UserProfileManager(BaseUserManager):
     """Manager for user profiles"""
 
-    def create_user(self, email, name, password=None):
+    def create_user(self, email, name,contact, is_staff, address, position, password=None):
         """Create a new user profile"""
         if not email:
             raise ValueError('Users must have an email address')
 
         email = self.normalize_email(email)
-        user = self.model(email=email, name=name,)
+        user = self.model(email=email, name=name,contact= contact, address = address, position= position, is_staff=is_staff)
 
         user.set_password(password)
         user.save(using=self._db)
 
         return user
 
-    def create_superuser(self, email, name, password):
+    def create_superuser(self, email, name,contact, is_staff, address, position, password=None):
         """Create and save a new superuser with given details"""
-        user = self.create_user(email, name, password)
-
+        user = self.create_user( email, name, contact, is_staff, address, position, password)
         user.is_superuser = True
         user.is_staff = True
         user.save(using=self._db)
-
         return user
-
 
 class UserProfile(AbstractBaseUser, PermissionsMixin):
     """Database model for users in the system"""
-    staff_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    staff_id = models.IntegerField(primary_key=True, editable=False, default=random.randint(1000,40000), unique=True)
     email = models.EmailField(max_length=255, unique=True)
     name = models.CharField(max_length=255)
     contact = models.CharField(max_length=20)
@@ -44,9 +43,9 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
 
     objects = UserProfileManager()
-
+    id = 'staff_id'
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['name']
+    REQUIRED_FIELDS = ['name','contact', 'address', 'is_staff', 'position']
 
     def get_full_name(self):
         """Retrieve full name for user"""

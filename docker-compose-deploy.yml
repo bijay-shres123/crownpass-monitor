@@ -5,8 +5,8 @@ services:
     image: google/cloud-sdk:338.0.0
     volumes:
       - gcp-creds:/creds
-      - .:/app
-    working_dir: /app
+      - .:/staff_profiles
+    working_dir: /staff_profiles
     environment:
       - CLOUDSDK_CONFIG=/creds
 

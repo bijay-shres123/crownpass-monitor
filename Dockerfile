@@ -1,9 +1,10 @@
 FROM python:3.9-alpine
-LABEL maintainer="londonappdeveloper.com"
+LABEL maintainer="admin@crownpass.com"
 
 COPY ./requirements.txt /requirements.txt
-COPY ./app /app
-WORKDIR /app
+COPY ./staff_profiles /staff_profiles
+
+WORKDIR /staff_profiles
 
 RUN python -m venv /py && \
     /py/bin/pip install --upgrade pip && \
@@ -12,4 +13,7 @@ RUN python -m venv /py && \
 
 ENV PATH="/py/bin:$PATH"
 
+
 USER django-user
+
+ADD . /staff_profiles/
