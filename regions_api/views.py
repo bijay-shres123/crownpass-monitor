@@ -16,11 +16,14 @@ class RegionViewset(viewsets.ModelViewSet):
     filterset_class = RegionFilter
     permission_classes = [IsAuthenticatedOrReadOnly,]
 
-    def get_serializer_class(self):
-        if self.action == 'list' or self.action == 'retrieve':
-            return serializers.RegionNestedSerializer
-        return serializers.RegionSerializer
+    # def get_serializer_class(self):
+    #     if self.action == 'list' or self.action == 'retrieve':
+    #         return serializers.RegionNestedSerializer
+    #     return serializers.RegionSerializer
 
-    def perform_create(self, serializer):
-        serializer.save(listed_by=self.request.user)
+    # def perform_create(self, serializer):
+    #     serializer.save(listed_by=self.request.user)
 
+
+    # #Test Result Serializer
+    # serializer_class = serializers.TestSerializer

@@ -3,7 +3,7 @@ from .models import  Region
 from rest_framework import serializers
    
 class RegionSerializer(serializers.ModelSerializer):
-    """Serializes a user profile object"""
+    """Serializes a user Region object"""
 
     class Meta:
         model = Region
