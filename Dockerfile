@@ -1,10 +1,13 @@
-FROM python:3.9-alpine
+FROM python:3.8-buster
 LABEL maintainer="admin@crownpass.com"
 
 COPY ./requirements.txt /requirements.txt
 COPY ./staff_profiles /staff_profiles
 
 WORKDIR /staff_profiles
+
+# Providing docker write access
+# RUN chown -R staff_profiles:staff_profiles /app
 
 RUN python -m venv /py && \
     /py/bin/pip install --upgrade pip && \
@@ -14,6 +17,6 @@ RUN python -m venv /py && \
 ENV PATH="/py/bin:$PATH"
 
 
-USER django-user
+
 
 ADD . /staff_profiles/

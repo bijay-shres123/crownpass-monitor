@@ -6,7 +6,7 @@ from django.contrib.auth.models import BaseUserManager
 from django.conf import settings
 import random
 
-
+# MODEL FOR STAFF PROFILE
 class UserProfileManager(BaseUserManager):
     """Manager for user profiles"""
 
