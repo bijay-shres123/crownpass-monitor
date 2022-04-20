@@ -62,14 +62,9 @@ class Region(models.Model):
     ]
     status = models.CharField('status',max_length=10, choices=STATUS_CHOICES)
     
+    def __str__(self):
+        return self.county_name
 
+    def results(self):
+        return self.results_set.all()
 
-#Test Result
-class TestResult(models.Model):
-    number_of_positive  =  models.IntegerField()
-    number_of_recoverd = models.IntegerField()
-    number_of_negative = models.IntegerField()
-
-    date = models.DateField()
-
-    county_name = models.ForeignKey(Region,null=True, on_delete=models.SET_NULL)

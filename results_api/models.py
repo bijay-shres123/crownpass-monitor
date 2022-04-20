@@ -8,4 +8,6 @@ class Results(models.Model):
 
     date = models.DateField()
 
-    county_name = models.ForeignKey(Region,null=True, on_delete=models.SET_NULL)
+    region = models.ForeignKey(Region,related_name = 'results' ,null=True, on_delete=models.SET_NULL)
+
+    

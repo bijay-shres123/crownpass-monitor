@@ -1,13 +1,18 @@
 
+import results_api
+from results_api.models import Results
 from .models import  Region
 from rest_framework import serializers
-   
+from results_api.serializers import ResultsReadSerializer
+
 class RegionSerializer(serializers.ModelSerializer):
     """Serializes a user Region object"""
 
+    results =  ResultsReadSerializer(many= True, read_only = True)
+
     class Meta:
         model = Region
-        fields = "__all__"
+        fields = ['id','region_name','county_name','city_town','status','results']
        
 
     def create(self, validated_data):
