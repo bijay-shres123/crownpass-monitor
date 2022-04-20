@@ -3,12 +3,12 @@ import results_api
 from results_api.models import Results
 from .models import  Region
 from rest_framework import serializers
-from results_api.serializers import ResultsReadSerializer
+from results_api.serializers import ResultsSerializer
 
 class RegionSerializer(serializers.ModelSerializer):
     """Serializes a user Region object"""
 
-    results =  ResultsReadSerializer(many= True, read_only = True)
+    results =  ResultsSerializer(many= True, read_only = True)
 
     class Meta:
         model = Region

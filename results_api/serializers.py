@@ -3,7 +3,7 @@ from results_api.models import Results
 from rest_framework import serializers
 # from regions_api.serializers import RegionSerializer
 
-class ResultsWriteSerializer(serializers.ModelSerializer):
+class ResultsSerializer(serializers.ModelSerializer):
     """Serializes a user Test object"""
     
 
@@ -24,10 +24,3 @@ class ResultsWriteSerializer(serializers.ModelSerializer):
         instance.save()
         return instance
 
-class ResultsReadSerializer(serializers.ModelSerializer):
-    """Serializes a user Test object"""
-    # region = RegionSerializer()
-
-    class Meta:
-        model = Results
-        fields = "__all__"

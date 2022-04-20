@@ -12,13 +12,13 @@ from rest_framework.settings import api_settings
 
 class ResultsViewSet(viewsets.ModelViewSet):
 
-    def get_serializer_class(self,*args,**kwargs):
-        if self.action in ['list','retrieve']:
-            return serializers.ResultsReadSerializer
-        else:
-            return serializers.ResultsWriteSerializer
+    # def get_serializer_class(self,*args,**kwargs):
+    #     if self.action in ['list','retrieve']:
+    #         return serializers.ResultsReadSerializer
+    #     else:
+    #         return serializers.ResultsWriteSerializer
     """Handle creating, creating and updating profiles"""
-    # serializer_class = serializers.ResultsSerializer
+    serializer_class = serializers.ResultsSerializer
     queryset = models.Results.objects.all()
 
     authentication_classes = (TokenAuthentication,)
