@@ -3,3 +3,7 @@ gunicorn>=20.1.0,<20.2
 djangorestframework
 attrs
 django-filter
+django-cors-headers
+djongo
+dnspython
+certifi

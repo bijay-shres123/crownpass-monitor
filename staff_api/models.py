@@ -1,5 +1,5 @@
 from email.policy import default
-from django.db import models
+from djongo import models
 from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
 from django.contrib.auth.models import BaseUserManager
@@ -33,7 +33,8 @@ class UserProfileManager(BaseUserManager):
 
 class UserProfile(AbstractBaseUser, PermissionsMixin):
     """Database model for users in the system"""
-    staff_id = models.IntegerField(primary_key=True, editable=False, default=random.randint(1000,40000), unique=True)
+    
+
     email = models.EmailField(max_length=255, unique=True)
     name = models.CharField(max_length=255)
     contact = models.CharField(max_length=20)
@@ -43,7 +44,7 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
 
     objects = UserProfileManager()
-    id = 'staff_id'
+    
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['name','contact', 'address', 'is_staff', 'position']
 

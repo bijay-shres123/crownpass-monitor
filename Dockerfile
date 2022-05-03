@@ -1,4 +1,6 @@
+#!/usr/bin/env bash
 FROM python:3.8-alpine
+
 LABEL maintainer="admin@crownpass.com"
 
 
@@ -19,10 +21,13 @@ RUN python -m venv /py && \
 
 
 ENV PATH="/py/bin:$PATH"
-
-
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+ENV PORT 8000
+ENV DEBUG=True
 
 
 ADD . /staff_profiles/
 
-CMD gunicorn -b :$PORT staff_profiles.wsgi
+CMD python manage.py runserver 0.0.0.0:8000
+# CMD gunicorn -b :$PORT staff_profiles.wsgi

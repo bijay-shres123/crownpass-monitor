@@ -1,7 +1,7 @@
-from django.db import models
+from djongo import models
 from regions_api.models import Region 
 #Test Result
-class Results(models.Model):
+class Result(models.Model):
     number_of_positive  =  models.IntegerField()
     number_of_recoverd = models.IntegerField()
     number_of_negative = models.IntegerField()

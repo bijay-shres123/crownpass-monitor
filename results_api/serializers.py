@@ -1,5 +1,5 @@
 
-from results_api.models import Results
+from results_api.models import Result
 from rest_framework import serializers
 # from regions_api.serializers import RegionSerializer
 
@@ -8,12 +8,12 @@ class ResultsSerializer(serializers.ModelSerializer):
     
 
     class Meta:
-        model = Results
+        model = Result
         fields = "__all__"
     
 
     def create(self, validated_data):
-        return Results.objects.create(**validated_data)
+        return Result.objects.create(**validated_data)
 
     def Test(self, instance, validated_data):
         instance.number_of_positive = validated_data.get('number_of_positive', instance.number_of_positive)

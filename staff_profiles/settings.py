@@ -9,8 +9,10 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
-
+from distutils.debug import DEBUG
+import os
 from pathlib import Path
+import urllib
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,10 +25,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-qk08tz3nrb44o3ze$8)+d(7po^2c63z@oy8j8$wgg^fq^ap2-o'
 
 # SECURITY WARNING: don't run with debug turned on in production!
+
+# DEBUG = os.environ.get('DEBUG')
 DEBUG = True
+ALLOWED_HOSTS = ['*']
+CORS_ORIGIN_WHITELIST = (
+    'http://localhost:3000',  # for localhost (REACT Default)
 
-ALLOWED_HOSTS = []
-
+)
 
 # Application definition
 
@@ -43,7 +49,7 @@ INSTALLED_APPS = [
     'regions_api',
     'django_filters',
     'results_api',
-    
+    'corsheaders',
 
 ]
 
@@ -55,6 +61,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'staff_profiles.urls'
@@ -75,20 +83,36 @@ TEMPLATES = [
     },
 ]
 
+
 WSGI_APPLICATION = 'staff_profiles.wsgi.application'
 
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-
+# Default database 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'djongo',
+#         'NAME': 'crownpassDB',
+        
+#     }
+# }
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+        'default': {
+            'ENGINE': 'djongo',
+            'NAME': 'test_crownpass',
+            'ENFORCE_SCHEMA': False,
+            'CLIENT': {
+                'host': "mongodb+srv://bijay123:iambijay123@cluster0.c7qcq.mongodb.net/test_crownpass?retryWrites=true&w=majority"
+            }  
+        }
 }
-
-
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 

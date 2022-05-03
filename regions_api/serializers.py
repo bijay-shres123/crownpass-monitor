@@ -1,6 +1,6 @@
 
 import results_api
-from results_api.models import Results
+from results_api.models import Result
 from .models import  Region
 from rest_framework import serializers
 from results_api.serializers import ResultsSerializer
